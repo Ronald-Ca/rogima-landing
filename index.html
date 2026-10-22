@@ -4,257 +4,249 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROGIMA Tecnologia</title>
-<meta name="description" content="A ROGIMA desenvolve software sob medida — web, mobile e APIs — do primeiro rascunho ao sistema no ar." />
+<meta name="description" content="A ROGIMA é uma software house que leva o seu sistema do primeiro rascunho ao ar — web, mobile e APIs — e continua cuidando dele depois que entra em produção." />
 <link rel="icon" type="image/png" href="assets/mark.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     color-scheme: dark;
-    --ink:        #0A0613;
-    --ink-2:      #0E0820;
-    --surface:    #140B2E;
-    --surface-2:  #1B1140;
-    --line:       #2A1C57;
+    --ink:        #0B0718;
+    --void:       #070411;
+    --surface:    #130B30;
+    --line:       #271A52;
+    --line-soft:  rgba(196,181,253,.14);
     --violet:     #5B16EE;
     --violet-2:   #7C3AED;
     --glow:       #8B5CF6;
     --lilac:      #C4B5FD;
-    --text:       #F4F2FD;
-    --muted:      #9E96C7;
-    --muted-dim:  #6E6794;
-    --grad:       linear-gradient(120deg, #6D28D9 0%, #8B5CF6 55%, #A78BFA 100%);
-    --radius:     18px;
-    --maxw:       1120px;
-    --display: "Space Grotesk", system-ui, sans-serif;
+    --text:       #F3F0FD;
+    --muted:      #A79FCB;
+    --muted-dim:  #716A98;
+
+    /* paper (one deliberate light section) */
+    --paper:      #F3EFFC;
+    --paper-2:    #EAE2FB;
+    --paper-ink:  #170D30;
+    --paper-mut:  #5C4F8A;
+    --paper-line: #D8CCF3;
+
+    --grad: linear-gradient(118deg, #6D28D9 0%, #8B5CF6 52%, #A78BFA 100%);
+    --maxw: 1140px;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
     --body: "Hanken Grotesk", system-ui, sans-serif;
+    --mono: "Space Mono", ui-monospace, monospace;
   }
 
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   body{
-    margin:0;
-    background: var(--ink);
-    color: var(--text);
-    font-family: var(--body);
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    margin:0; background: var(--ink); color: var(--text);
+    font-family: var(--body); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   a{ color: inherit; text-decoration: none; }
   img{ max-width:100%; display:block; }
   ::selection{ background: rgba(139,92,246,.35); color:#fff; }
-
-  :focus-visible{ outline: 2px solid var(--glow); outline-offset: 3px; border-radius: 4px; }
-
+  :focus-visible{ outline: 2px solid var(--glow); outline-offset: 3px; border-radius: 3px; }
   .wrap{ width: min(100% - 48px, var(--maxw)); margin-inline: auto; }
 
-  /* ---- Brand mark: gradient fill via mask over the PNG silhouette ---- */
-  .mark{
-    display:inline-block;
-    background-image: var(--grad);
+  /* brand mark: gradient fill masked by the PNG silhouette */
+  .mark{ display:inline-block; background-image: var(--grad);
     -webkit-mask: url("assets/mark.png") center / contain no-repeat;
-            mask: url("assets/mark.png") center / contain no-repeat;
-  }
+            mask: url("assets/mark.png") center / contain no-repeat; }
 
-  /* inline check glyph used as "delivered" marker */
-  .check{ flex:none; color: var(--glow); }
+  /* double-check glyph — the delivered receipt */
+  .ticks{ display:block; width: 30px; height: 17px; overflow: visible; }
+  .ticks path{ fill:none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+    stroke: currentColor; }
+
+  /* kicker: mono, carries a real datum (index or status) */
+  .kick{ font-family: var(--mono); font-size: 12.5px; letter-spacing:.06em;
+    color: var(--glow); text-transform: none; display:flex; align-items:center; gap:12px; margin:0 0 20px; }
+  .kick .idx{ color: var(--muted-dim); }
+  .kick .bar{ height:1px; width:40px; background: var(--line-soft); }
+
+  h2{ font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4.4vw, 50px);
+    line-height: 1.04; letter-spacing: -0.02em; margin: 0 0 18px; }
+  .lead{ color: var(--muted); font-size: clamp(16px, 2vw, 19px); max-width: 56ch; margin: 0; }
+
+  /* buttons — squared, engineered, not a candy pill */
+  .btn{ font-family: var(--display); font-weight: 600; font-size: 15px;
+    padding: 13px 22px; border-radius: 8px; cursor: pointer; border: 1px solid transparent;
+    display: inline-flex; align-items:center; gap: 10px; transition: background .2s, border-color .2s, color .2s; }
+  .btn .ticks{ width: 22px; height: 13px; }
+  .btn-primary{ background: var(--violet); color:#fff; }
+  .btn-primary:hover{ background: var(--violet-2); }
+  .btn-line{ background: transparent; color: var(--text); border-color: var(--line); }
+  .btn-line:hover{ border-color: var(--glow); color:#fff; }
 
   /* ============ NAV ============ */
-  header.nav{
-    position: sticky; top:0; z-index: 50;
-    background: color-mix(in srgb, var(--ink) 72%, transparent);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid transparent;
-    transition: border-color .3s ease, background .3s ease;
-  }
+  header.nav{ position: sticky; top:0; z-index:50;
+    background: color-mix(in srgb, var(--ink) 80%, transparent);
+    backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; }
   header.nav.scrolled{ border-bottom-color: var(--line); }
-  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height: 76px; }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height: 74px; }
   .brand{ display:flex; align-items:center; gap: 12px; }
-  .brand .mark{ width: 34px; height: 34px; }
-  .brand .wm{ font-family: var(--display); font-weight:700; font-size: 21px; letter-spacing:.02em; }
-  .brand .wm small{ display:block; font-size: 9.5px; letter-spacing:.42em; color: var(--lilac); font-weight:600; margin-top:-2px; }
+  .brand .mark{ width: 32px; height: 32px; }
+  .brand .wm{ font-family: var(--display); font-weight:800; font-size: 20px; letter-spacing:.01em; line-height:1; }
+  .brand .wm small{ display:block; font-family: var(--mono); font-size: 9px; letter-spacing:.34em;
+    color: var(--lilac); font-weight:400; margin-top:4px; }
   nav.links{ display:flex; align-items:center; gap: 34px; }
-  nav.links a{ color: var(--muted); font-weight:500; font-size:15px; transition: color .2s; }
-  nav.links a:hover{ color: var(--text); }
-
-  .btn{
-    font-family: var(--display); font-weight:600; font-size: 15px;
-    padding: 12px 22px; border-radius: 999px; cursor:pointer;
-    border: 1px solid transparent; display:inline-flex; align-items:center; gap:10px;
-    transition: transform .15s ease, box-shadow .25s ease, background .2s ease, border-color .2s;
-  }
-  .btn-primary{ background: var(--grad); color:#fff; box-shadow: 0 10px 34px -12px rgba(124,58,237,.9); }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 18px 44px -14px rgba(139,92,246,1); }
-  .btn-ghost{ background: transparent; color: var(--text); border-color: var(--line); }
-  .btn-ghost:hover{ border-color: var(--glow); background: rgba(139,92,246,.08); }
-  nav.links .btn{ padding: 10px 20px; }
+  nav.links a:not(.btn){ color: var(--muted); font-weight:500; font-size:15px; transition: color .2s; }
+  nav.links a:not(.btn):hover{ color: var(--text); }
 
   /* ============ HERO ============ */
-  .hero{ position: relative; padding: 92px 0 96px; overflow: hidden; }
-  .hero-bg{ position:absolute; inset:0; z-index:0; pointer-events:none; }
-  .hero-bg .aura{
-    position:absolute; width: 760px; height: 760px; right: -200px; top: -220px;
-    background: radial-gradient(circle, rgba(124,58,237,.42) 0%, rgba(91,22,238,.12) 42%, transparent 68%);
-    filter: blur(10px);
-  }
-  .hero-bg .aura2{
-    position:absolute; width: 520px; height: 520px; left: -180px; bottom: -260px;
-    background: radial-gradient(circle, rgba(139,92,246,.22) 0%, transparent 65%);
-  }
-  /* diagonal rounded bars echoing the banner */
-  .bars{ position:absolute; inset:0; overflow:hidden; opacity:.5; }
-  .bars span{
-    position:absolute; display:block; border-radius: 999px;
-    background: linear-gradient(135deg, rgba(124,58,237,.0), rgba(124,58,237,.28));
-    border: 1px solid rgba(124,58,237,.18);
-    transform: rotate(-45deg);
-  }
-  .bars span:nth-child(1){ width: 300px; height: 56px; top: 120px; left: -40px; }
-  .bars span:nth-child(2){ width: 180px; height: 56px; top: 60px; left: 120px; opacity:.6; }
-  .bars span:nth-child(3){ width: 420px; height: 70px; bottom: 40px; right: -80px; }
-  .bars span:nth-child(4){ width: 220px; height: 70px; bottom: 150px; right: 120px; opacity:.6; }
+  .hero{ padding: 86px 0 84px; position: relative; }
+  .hero::before{ /* single restrained ambient wash, top-right only */
+    content:""; position:absolute; z-index:0; width: 620px; height: 620px; right: -220px; top: -260px;
+    background: radial-gradient(circle, rgba(124,58,237,.30), transparent 62%); pointer-events:none; }
+  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.08fr .92fr;
+    gap: 60px; align-items: center; }
 
-  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items:center; }
+  .hero h1{ font-family: var(--display); font-weight: 800;
+    font-size: clamp(40px, 6vw, 72px); line-height: 1.0; letter-spacing: -0.03em; margin: 0 0 26px; }
+  .hero .sub{ font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 48ch; margin: 0 0 34px; }
+  .hero-cta{ display:flex; gap: 14px; flex-wrap: wrap; align-items:center; }
 
-  .tagline{
-    display:inline-flex; align-items:center; gap:10px;
-    font-size: 14px; color: var(--lilac); font-weight:600;
-    padding: 7px 14px 7px 10px; border:1px solid var(--line); border-radius:999px;
-    background: rgba(139,92,246,.06); margin-bottom: 26px;
-  }
-  .tagline .dot{ width:7px; height:7px; border-radius:50%; background: var(--glow); box-shadow:0 0 12px var(--glow); }
+  /* the delivery ledger — the characteristic artifact of ROGIMA's world */
+  .ledger{ border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    background: linear-gradient(180deg, var(--surface), #0E0826);
+    box-shadow: 0 40px 90px -50px rgba(124,58,237,.7); }
+  .ledger-top{ display:flex; align-items:center; gap: 10px; padding: 14px 18px;
+    border-bottom: 1px solid var(--line); background: rgba(124,58,237,.06); }
+  .ledger-top .dot{ width:10px; height:10px; border-radius:50%; background:#2B1F57; }
+  .ledger-top .dot:nth-child(2){ background:#3A2A6E; } .ledger-top .dot:nth-child(3){ background:#4A3690; }
+  .ledger-top .t{ font-family: var(--mono); font-size: 12.5px; color: var(--lilac); margin-left: 6px; }
+  .ledger ul{ list-style:none; margin:0; padding: 6px 0; }
+  .ledger li{ display:grid; grid-template-columns: 1fr auto auto; align-items:center; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--line-soft); }
+  .ledger li:last-child{ border-bottom: 0; }
+  .ledger .nm{ font-family: var(--display); font-weight: 600; font-size: 16px; }
+  .ledger .sec{ font-family: var(--mono); font-size: 11px; color: var(--muted-dim); white-space:nowrap; }
+  .ledger .st{ color: var(--muted-dim); } /* starts as "sent" grey, becomes violet "delivered" */
+  .ledger-foot{ padding: 13px 20px; border-top: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12px; color: var(--muted); display:flex; justify-content:space-between; }
+  .ledger-foot b{ color: var(--glow); font-weight: 700; }
 
-  h1.title{
-    font-family: var(--display); font-weight:700;
-    font-size: clamp(42px, 6.4vw, 78px); line-height: 1.02;
-    letter-spacing: -0.02em; margin: 0 0 24px;
-  }
-  h1.title .g{ background: var(--grad); -webkit-background-clip:text; background-clip:text; color: transparent; }
-  .lead{ font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 46ch; margin: 0 0 36px; }
-  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-  .hero-meta{ display:flex; gap: 30px; margin-top: 46px; flex-wrap:wrap; }
-  .hero-meta .m b{ font-family:var(--display); font-size: 27px; display:block; }
-  .hero-meta .m span{ font-size:13.5px; color: var(--muted-dim); }
+  /* one-time delivered animation */
+  .ledger .st{ opacity:.5; transform: translateX(-3px); }
+  .ledger.live .st{ color: var(--glow); opacity:1; transform:none;
+    transition: color .5s ease, opacity .5s ease, transform .5s ease; }
+  .ledger.live .st:nth-child(3){ transition-delay:.15s; }
+  .ledger li:nth-child(2) .st{ transition-delay:.30s; } .ledger li:nth-child(3) .st{ transition-delay:.45s; }
+  .ledger li:nth-child(4) .st{ transition-delay:.60s; }
 
-  .hero-mark{ position: relative; display:grid; place-items:center; }
-  .hero-mark .ring{
-    position:absolute; width: 330px; height:330px; border-radius:50%;
-    background: radial-gradient(circle, rgba(124,58,237,.35), transparent 62%);
-    filter: blur(6px);
-  }
-  .hero-mark .big{
-    position:relative; width: min(340px, 72%); aspect-ratio: 1.05/1;
-    filter: drop-shadow(0 24px 60px rgba(124,58,237,.55));
-    animation: floaty 7s ease-in-out infinite;
-  }
-  @keyframes floaty{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-14px); } }
+  /* ============ CAPABILITIES — spec sheet, not cards ============ */
+  section{ padding: 94px 0; }
+  .sec-head{ max-width: 60ch; margin-bottom: 44px; }
+  .spec{ border-top: 1px solid var(--line); }
+  .spec-row{ display:grid; grid-template-columns: 56px 240px 1fr; gap: 28px; align-items: baseline;
+    padding: 30px 6px; border-bottom: 1px solid var(--line); }
+  .spec-row .no{ font-family: var(--mono); font-size: 13px; color: var(--glow); }
+  .spec-row h3{ font-family: var(--display); font-weight: 600; font-size: clamp(19px,2.4vw,24px);
+    margin:0; letter-spacing:-.01em; }
+  .spec-row p{ margin:0; color: var(--muted); font-size: 16px; line-height:1.55; max-width: 54ch; }
 
-  /* ============ generic section ============ */
-  section{ position: relative; padding: 96px 0; }
-  .eyebrow{ font-family:var(--display); font-weight:600; font-size:14px; color: var(--glow); margin:0 0 14px; display:flex; align-items:center; gap:10px; }
-  .eyebrow::before{ content:""; width:26px; height:2px; background: var(--grad); border-radius:2px; }
-  h2{ font-family: var(--display); font-weight:700; font-size: clamp(30px, 4vw, 46px); line-height:1.08; letter-spacing:-0.02em; margin:0 0 18px; }
-  .section-lead{ color: var(--muted); font-size: 18px; max-width: 58ch; }
+  /* ============ ENTREGAS — paper manifest ============ */
+  #entregas{ background: var(--paper); color: var(--paper-ink); }
+  #entregas .kick{ color: var(--violet-2); }
+  #entregas .kick .idx{ color: var(--paper-mut); }
+  #entregas .kick .bar{ background: var(--paper-line); }
+  #entregas h2{ color: var(--paper-ink); }
+  #entregas .lead{ color: var(--paper-mut); }
+  .manifest{ margin-top: 40px; border: 1px solid var(--paper-line); border-radius: 14px;
+    background: #FBF9FF; overflow: hidden; }
+  .manifest-head{ display:grid; grid-template-columns: 1fr 150px 128px; gap: 20px;
+    padding: 14px 26px; border-bottom: 1px solid var(--paper-line);
+    font-family: var(--mono); font-size: 11.5px; letter-spacing:.08em; color: var(--paper-mut); background: var(--paper-2); }
+  .entry{ display:grid; grid-template-columns: 1fr 150px 128px; gap: 20px; align-items: center;
+    padding: 26px; border-bottom: 1px solid var(--paper-line); transition: background .2s; }
+  .entry:last-child{ border-bottom: 0; }
+  .entry:hover{ background: #F6F2FF; }
+  .entry .big{ font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3vw, 30px);
+    letter-spacing:-.02em; margin:0 0 6px; color: var(--paper-ink); }
+  .entry .big .plus{ color: var(--violet); }
+  .entry .desc{ margin:0; font-size: 15px; color: var(--paper-mut); line-height:1.5; max-width: 60ch; }
+  .entry .area{ font-family: var(--mono); font-size: 12.5px; color: var(--violet-2); }
+  .entry .status{ display:flex; align-items:center; gap: 9px; color: var(--violet);
+    font-family: var(--mono); font-size: 12.5px; font-weight: 700; justify-self: start; }
+  .manifest-foot{ padding: 16px 26px; font-family: var(--mono); font-size: 12px; color: var(--paper-mut);
+    display:flex; justify-content: space-between; background: var(--paper-2); }
+  .manifest-foot b{ color: var(--violet-2); }
 
-  /* ---- Capabilities ---- */
-  .caps{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 52px; }
-  .cap{
-    padding: 26px 24px; border:1px solid var(--line); border-radius: var(--radius);
-    background: linear-gradient(180deg, rgba(27,17,64,.5), rgba(14,8,32,.3));
-    transition: border-color .25s, transform .25s;
-  }
-  .cap:hover{ border-color: color-mix(in srgb, var(--glow) 55%, var(--line)); transform: translateY(-3px); }
-  .cap .ic{ width:40px; height:40px; border-radius:11px; display:grid; place-items:center; background: rgba(139,92,246,.12); border:1px solid var(--line); margin-bottom:18px; color: var(--glow); }
-  .cap h3{ font-family:var(--display); font-size:18px; font-weight:600; margin:0 0 8px; }
-  .cap p{ margin:0; font-size:14.5px; color: var(--muted); line-height:1.55; }
+  /* ============ COMO ENTREGAMOS — pipeline ============ */
+  .pipe{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 44px;
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .step{ padding: 30px 26px; border-right: 1px solid var(--line); position: relative; }
+  .step:last-child{ border-right: 0; }
+  .step .n{ font-family: var(--mono); font-size: 13px; color: var(--muted-dim); margin-bottom: 20px; display:block; }
+  .step h4{ font-family: var(--display); font-weight: 700; font-size: 20px; margin: 0 0 10px; display:flex; align-items:center; gap:10px; }
+  .step h4 .ticks{ color: var(--glow); width: 26px; height: 15px; }
+  .step p{ margin:0; color: var(--muted); font-size: 14.5px; line-height:1.55; }
+  .step.last{ background: linear-gradient(180deg, rgba(124,58,237,.12), transparent); }
 
-  /* ---- Projects: delivery rows ---- */
-  #projetos{ background:
-    radial-gradient(900px 420px at 85% -5%, rgba(124,58,237,.10), transparent 60%),
-    var(--ink-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .proj{ margin-top: 20px; border-top:1px solid var(--line); }
-  .proj-row{
-    display:grid; grid-template-columns: 54px 1fr auto; gap: 26px; align-items:center;
-    padding: 34px 8px; border-bottom:1px solid var(--line);
-    transition: background .25s, padding-left .25s;
-  }
-  .proj-row:hover{ background: rgba(139,92,246,.05); padding-left: 20px; }
-  .proj-check{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-    background: rgba(139,92,246,.1); border:1px solid var(--line); color: var(--glow); }
-  .proj-main h3{ font-family:var(--display); font-weight:700; font-size: clamp(23px, 3vw, 31px); margin:0 0 7px; letter-spacing:-.01em; }
-  .proj-main h3 .plus{ color: var(--glow); }
-  .proj-main p{ margin:0; color: var(--muted); font-size: 16px; max-width: 60ch; }
-  .proj-tag{ font-family:var(--display); font-size:13px; font-weight:600; color: var(--lilac);
-    padding:7px 15px; border:1px solid var(--line); border-radius:999px; white-space:nowrap; background: rgba(139,92,246,.06); }
+  .stack{ margin-top: 54px; display:flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    padding-top: 30px; border-top: 1px solid var(--line); }
+  .stack .lbl{ font-family: var(--mono); font-size: 12.5px; color: var(--muted-dim); white-space:nowrap; }
+  .stack .list{ font-family: var(--mono); font-size: 14.5px; color: var(--lilac); line-height: 2; }
+  .stack .list span{ color: var(--muted-dim); }
 
-  /* ---- Stack ---- */
-  .stack-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items:center; }
-  .chips{ display:flex; flex-wrap:wrap; gap:12px; margin-top: 8px; }
-  .chip{ font-family:var(--display); font-weight:500; font-size:14.5px; color: var(--text);
-    padding:11px 18px; border:1px solid var(--line); border-radius:12px; background: rgba(20,11,46,.5); }
-  .chip:nth-child(odd){ border-color: color-mix(in srgb, var(--glow) 30%, var(--line)); }
-  .flow{ list-style:none; margin: 10px 0 0; padding:0; }
-  .flow li{ display:flex; gap:16px; padding: 16px 0; border-bottom:1px dashed var(--line); }
-  .flow li:last-child{ border-bottom:0; }
-  .flow .n{ font-family:var(--display); font-weight:700; color: var(--glow); font-size:15px; width:28px; flex:none; }
-  .flow b{ font-family:var(--display); font-weight:600; display:block; margin-bottom:3px; }
-  .flow span{ color: var(--muted); font-size:15px; }
+  /* ============ CTA — compose a message ============ */
+  #contato{ background: var(--void); border-top: 1px solid var(--line); }
+  .compose-grid{ display:grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  .compose-grid h2{ margin-bottom: 16px; }
+  .compose{ border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+  .compose .ch{ display:flex; align-items:center; gap: 10px; padding: 14px 18px;
+    border-bottom: 1px solid var(--line); background: rgba(124,58,237,.06); }
+  .compose .ch .mark{ width: 20px; height: 20px; }
+  .compose .ch span{ font-family: var(--mono); font-size: 12.5px; color: var(--lilac); }
+  .compose textarea{ width:100%; border:0; background: transparent; color: var(--text);
+    font-family: var(--body); font-size: 16px; line-height:1.6; padding: 20px 18px; resize: vertical;
+    min-height: 130px; }
+  .compose textarea::placeholder{ color: var(--muted-dim); }
+  .compose textarea:focus{ outline: none; }
+  .compose .send{ display:flex; justify-content: space-between; align-items:center; gap:14px;
+    padding: 14px 16px; border-top: 1px solid var(--line); }
+  .compose .hint{ font-family: var(--mono); font-size: 11.5px; color: var(--muted-dim); }
 
-  /* ---- CTA band ---- */
-  .cta-band{ position:relative; overflow:hidden; }
-  .cta-card{
-    position:relative; border-radius: 28px; padding: 64px 56px; overflow:hidden;
-    background: linear-gradient(135deg, #2A1065 0%, #140B2E 70%);
-    border:1px solid var(--line);
-  }
-  .cta-card .glowspot{ position:absolute; width:520px; height:520px; right:-160px; top:-200px;
-    background: radial-gradient(circle, rgba(139,92,246,.45), transparent 62%); pointer-events:none; }
-  .cta-card h2{ margin:0 0 14px; }
-  .cta-card p{ color: var(--lilac); max-width: 50ch; margin:0 0 30px; font-size:18px; }
-  .cta-card .hero-cta{ position:relative; z-index:1; }
-
-  /* ---- Footer ---- */
-  footer{ border-top:1px solid var(--line); padding: 54px 0 46px; }
+  /* ============ FOOTER ============ */
+  footer{ border-top:1px solid var(--line); padding: 54px 0 46px; background: var(--void); }
   .foot-grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; }
   .foot-brand .mark{ width:30px; height:30px; }
   .foot-brand p{ color: var(--muted-dim); font-size:14px; max-width: 34ch; margin:16px 0 0; }
   .foot-links{ display:flex; gap: 60px; flex-wrap:wrap; }
-  .foot-col h4{ font-family:var(--display); font-size:13px; letter-spacing:.14em; color:var(--muted-dim); margin:0 0 14px; font-weight:600; }
+  .foot-col h4{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted-dim); margin:0 0 16px; font-weight:700; }
   .foot-col a, .foot-col span{ display:block; color: var(--muted); font-size:14.5px; margin-bottom:10px; transition:color .2s; }
   .foot-col a:hover{ color: var(--text); }
-  .foot-bottom{ margin-top: 44px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; color: var(--muted-dim); font-size:13px; }
-
-  /* reveal */
-  .reveal{ opacity:0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in{ opacity:1; transform:none; }
+  .foot-bottom{ margin-top: 44px; padding-top:22px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; color: var(--muted-dim); font-size:13px; font-family: var(--mono); }
 
   /* ============ responsive ============ */
-  @media (max-width: 900px){
-    .hero-grid{ grid-template-columns: 1fr; gap: 10px; }
-    .hero-mark{ order:-1; }
-    .hero-mark .big{ width: 210px; }
-    .hero-mark .ring{ width: 230px; height:230px; }
-    .caps{ grid-template-columns: 1fr 1fr; }
-    .stack-grid{ grid-template-columns: 1fr; gap: 36px; }
+  @media (max-width: 920px){
+    .hero-grid{ grid-template-columns: 1fr; gap: 44px; }
+    .spec-row{ grid-template-columns: 40px 1fr; row-gap: 8px; }
+    .spec-row p{ grid-column: 2; }
+    .pipe{ grid-template-columns: 1fr 1fr; }
+    .step:nth-child(1), .step:nth-child(2){ border-bottom: 1px solid var(--line); }
+    .step:nth-child(2){ border-right: 0; }
+    .compose-grid{ grid-template-columns: 1fr; gap: 36px; }
     nav.links a:not(.btn){ display:none; }
   }
-  @media (max-width: 620px){
-    body{ font-size: 16px; }
-    section{ padding: 70px 0; }
-    .hero{ padding: 56px 0 70px; }
-    .caps{ grid-template-columns: 1fr; }
-    .proj-row{ grid-template-columns: 40px 1fr; row-gap:14px; }
-    .proj-tag{ grid-column: 2; justify-self:start; }
-    .cta-card{ padding: 44px 26px; }
-    .brand .wm small{ letter-spacing:.3em; }
-    .hero-meta{ gap: 22px; }
+  @media (max-width: 600px){
+    body{ font-size: 16px; } section{ padding: 66px 0; } .hero{ padding: 48px 0 64px; }
+    .pipe{ grid-template-columns: 1fr; }
+    .step{ border-right: 0; border-bottom: 1px solid var(--line); }
+    .step:last-child{ border-bottom: 0; }
+    .manifest-head{ display:none; }
+    .entry{ grid-template-columns: 1fr; row-gap: 12px; }
+    .ledger li{ grid-template-columns: 1fr auto; }
+    .ledger .sec{ display:none; }
   }
   @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; }
-    .reveal{ opacity:1; transform:none; transition:none; }
+    *{ animation: none !important; transition: none !important; }
+    .ledger .st{ opacity:1; transform:none; color: var(--glow); }
     html{ scroll-behavior:auto; }
   }
 </style>
@@ -269,9 +261,9 @@
     </a>
     <nav class="links">
       <a href="#fazemos">O que fazemos</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#processo">Como trabalhamos</a>
-      <a class="btn btn-primary" href="#contato">Falar com a ROGIMA</a>
+      <a href="#entregas">Entregas</a>
+      <a href="#processo">Como entregamos</a>
+      <a class="btn btn-primary" href="#contato">Começar um projeto</a>
     </nav>
   </div>
 </header>
@@ -280,29 +272,46 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="aura"></div>
-      <div class="aura2"></div>
-      <div class="bars"><span></span><span></span><span></span><span></span></div>
-    </div>
     <div class="wrap hero-grid">
       <div>
-        <span class="tagline"><span class="dot"></span> Software house • web, mobile e APIs</span>
-        <h1 class="title">Tecnologia<br>que <span class="g">entrega</span>.</h1>
-        <p class="lead">A ROGIMA constrói software sob medida de ponta a ponta — do primeiro rascunho ao sistema rodando no ar, testado e no ritmo do seu negócio.</p>
+        <p class="kick"><span class="idx">rogima@prod:~$</span> status — 4 sistemas no ar</p>
+        <h1>A gente constrói, entrega<br>e mantém de pé.</h1>
+        <p class="sub">A ROGIMA é uma software house que leva o seu sistema do primeiro rascunho à produção — web, mobile e APIs — e continua cuidando dele depois que entra no ar.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#contato">Começar um projeto</a>
-          <a class="btn btn-ghost" href="#projetos">Ver o que já entregamos</a>
-        </div>
-        <div class="hero-meta">
-          <div class="m"><b>4</b><span>produtos no ar</span></div>
-          <div class="m"><b>Full-stack</b><span>web · mobile · API</span></div>
-          <div class="m"><b>Sob medida</b><span>para cada operação</span></div>
+          <a class="btn btn-line" href="#entregas">Ver as entregas</a>
         </div>
       </div>
-      <div class="hero-mark" aria-hidden="true">
-        <div class="ring"></div>
-        <span class="mark big"></span>
+
+      <!-- delivery ledger -->
+      <div class="ledger" id="ledger">
+        <div class="ledger-top">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="t">rogima — entregas.log</span>
+        </div>
+        <ul>
+          <li>
+            <span class="nm">Agro Hub</span>
+            <span class="sec">agronegócio</span>
+            <span class="st" aria-label="entregue"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></span>
+          </li>
+          <li>
+            <span class="nm">Meus Favoritos</span>
+            <span class="sec">social</span>
+            <span class="st" aria-label="entregue"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></span>
+          </li>
+          <li>
+            <span class="nm">Cria+</span>
+            <span class="sec">pecuária · ATER</span>
+            <span class="st" aria-label="entregue"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></span>
+          </li>
+          <li>
+            <span class="nm">Notifica-me</span>
+            <span class="sec">finanças</span>
+            <span class="st" aria-label="entregue"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></span>
+          </li>
+        </ul>
+        <div class="ledger-foot"><span>4 / 4 entregues</span><b>no ar ✓✓</b></div>
       </div>
     </div>
   </section>
@@ -310,144 +319,144 @@
   <!-- O QUE FAZEMOS -->
   <section id="fazemos">
     <div class="wrap">
-      <p class="eyebrow">O que fazemos</p>
-      <h2>Um time que leva a ideia<br>até o sistema no ar.</h2>
-      <p class="section-lead">Cuidamos de todas as camadas: a interface que a pessoa usa, a API que sustenta tudo, o banco de dados, as integrações e a infraestrutura de deploy. Você acompanha, a gente entrega.</p>
-
-      <div class="caps">
-        <article class="cap">
-          <div class="ic" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
+      <div class="sec-head">
+        <p class="kick"><span class="idx">01</span><span class="bar"></span> O que fazemos</p>
+        <h2>Quatro frentes,<br>um sistema só.</h2>
+        <p class="lead">Cuidamos de todas as camadas — a tela que a pessoa usa, a API que sustenta tudo, o banco, as integrações e o deploy. Você acompanha; a gente entrega.</p>
+      </div>
+      <div class="spec">
+        <div class="spec-row">
+          <span class="no">/01</span>
           <h3>Produtos web</h3>
-          <p>Aplicações React rápidas e responsivas, do painel administrativo ao produto que vai para o cliente final.</p>
-        </article>
-        <article class="cap">
-          <div class="ic" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
-          </div>
-          <h3>Mobile e offline</h3>
-          <p>Apps Android e PWAs que funcionam mesmo sem internet e sincronizam quando o sinal volta.</p>
-        </article>
-        <article class="cap">
-          <div class="ic" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="10" cy="17" r="1.4" fill="currentColor" stroke="none"/></svg>
-          </div>
-          <h3>APIs e integrações</h3>
-          <p>APIs sólidas em Node e integrações com WhatsApp, Telegram e os serviços que seu fluxo precisa.</p>
-        </article>
-        <article class="cap">
-          <div class="ic" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
-          </div>
-          <h3>Infra e deploy</h3>
-          <p>Containers Docker, banco PostgreSQL e um caminho de publicação previsível, do ambiente local à produção.</p>
-        </article>
+          <p>Aplicações React do painel interno ao produto que vai para o cliente final — rápidas, responsivas e fáceis de manter.</p>
+        </div>
+        <div class="spec-row">
+          <span class="no">/02</span>
+          <h3>Mobile &amp; offline</h3>
+          <p>Apps Android e PWAs que funcionam sem internet e sincronizam sozinhos quando o sinal volta.</p>
+        </div>
+        <div class="spec-row">
+          <span class="no">/03</span>
+          <h3>APIs &amp; integrações</h3>
+          <p>APIs em Node que aguentam carga e conversam com WhatsApp, Telegram e os serviços que o seu fluxo exigir.</p>
+        </div>
+        <div class="spec-row">
+          <span class="no">/04</span>
+          <h3>Infra &amp; deploy</h3>
+          <p>Docker, PostgreSQL e um caminho de publicação previsível, do ambiente local até a produção.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJETOS -->
-  <section id="projetos">
+  <!-- ENTREGAS (paper manifest) -->
+  <section id="entregas">
     <div class="wrap">
-      <p class="eyebrow">Projetos entregues</p>
-      <h2>Sistemas reais, no ar e em uso.</h2>
-      <p class="section-lead">Cada linha abaixo é um produto que saiu do papel e virou operação de verdade — áreas diferentes, mesma régua de qualidade.</p>
+      <div class="sec-head">
+        <p class="kick"><span class="idx">02</span><span class="bar"></span> Entregas</p>
+        <h2>Sistemas reais, no ar e em uso.</h2>
+        <p class="lead">Cada linha é um produto que saiu do papel e virou operação de verdade — áreas diferentes, a mesma régua de qualidade.</p>
+      </div>
 
-      <div class="proj">
-        <div class="proj-row">
-          <div class="proj-check" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+      <div class="manifest">
+        <div class="manifest-head"><span>PRODUTO</span><span>ÁREA</span><span>STATUS</span></div>
+
+        <div class="entry">
+          <div>
+            <h3 class="big">Agro Hub</h3>
+            <p class="desc">Gestão operacional para o campo: funcionários temporários, acerto de colheita, frota, peças e manutenções — com app Android para usar no meio da lavoura.</p>
           </div>
-          <div class="proj-main">
-            <h3>Agro Hub</h3>
-            <p>Gestão operacional para o campo: controle de funcionários temporários, acerto de colheita, frota, peças e manutenções — com app Android para usar no meio da lavoura.</p>
-          </div>
-          <span class="proj-tag">Agronegócio</span>
+          <span class="area">Agronegócio</span>
+          <span class="status"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg> Entregue</span>
         </div>
 
-        <div class="proj-row">
-          <div class="proj-check" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+        <div class="entry">
+          <div>
+            <h3 class="big">Meus Favoritos</h3>
+            <p class="desc">Portfólio social para catalogar o que você gosta — animes, séries, filmes, jogos e músicas — com perfil público, feed e amizades.</p>
           </div>
-          <div class="proj-main">
-            <h3>Meus Favoritos</h3>
-            <p>Portfólio social para catalogar o que você gosta — animes, séries, filmes, jogos e músicas — com perfil público personalizado, feed e amizades.</p>
-          </div>
-          <span class="proj-tag">Social</span>
+          <span class="area">Social</span>
+          <span class="status"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg> Entregue</span>
         </div>
 
-        <div class="proj-row">
-          <div class="proj-check" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+        <div class="entry">
+          <div>
+            <h3 class="big">Cria<span class="plus">+</span></h3>
+            <p class="desc">Plataforma de assistência técnica para pecuária de cria: multi-organização, mapas e PWA que trabalha offline no campo e sincroniza depois.</p>
           </div>
-          <div class="proj-main">
-            <h3>Cria<span class="plus">+</span></h3>
-            <p>Plataforma de assistência técnica para pecuária de cria: multi-organização, mapas e PWA que trabalha offline no campo e sincroniza depois.</p>
-          </div>
-          <span class="proj-tag">Pecuária · ATER</span>
+          <span class="area">Pecuária · ATER</span>
+          <span class="status"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg> Entregue</span>
         </div>
 
-        <div class="proj-row">
-          <div class="proj-check" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+        <div class="entry">
+          <div>
+            <h3 class="big">Notifica-me</h3>
+            <p class="desc">Lembretes de contas recorrentes que avisam por WhatsApp e Telegram nos dias que você escolher. A pessoa responde “1” na conversa e a conta já fica paga.</p>
           </div>
-          <div class="proj-main">
-            <h3>Notifica-me</h3>
-            <p>Lembretes de contas recorrentes que avisam por WhatsApp e Telegram nos dias que você escolher. A pessoa responde “1” na conversa e a conta já fica paga.</p>
-          </div>
-          <span class="proj-tag">Finanças pessoais</span>
+          <span class="area">Finanças</span>
+          <span class="status"><svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg> Entregue</span>
         </div>
+
+        <div class="manifest-foot"><span>Manifesto de entregas — ROGIMA Tecnologia</span><span><b>4</b> no ar</span></div>
       </div>
     </div>
   </section>
 
-  <!-- COMO TRABALHAMOS -->
+  <!-- COMO ENTREGAMOS -->
   <section id="processo">
-    <div class="wrap stack-grid">
-      <div>
-        <p class="eyebrow">Como trabalhamos</p>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick"><span class="idx">03</span><span class="bar"></span> Como entregamos</p>
         <h2>Da conversa inicial<br>ao deploy final.</h2>
-        <p class="section-lead">Um caminho curto e transparente. Você sabe em que etapa o projeto está e o que vem a seguir.</p>
-        <ul class="flow">
-          <li><span class="n">01</span><div><b>Entender</b><span>Mapeamos a operação e as regras de negócio antes de escrever qualquer linha.</span></div></li>
-          <li><span class="n">02</span><div><b>Desenhar</b><span>Arquitetura, interface e contrato da API definidos para não refazer depois.</span></div></li>
-          <li><span class="n">03</span><div><b>Construir</b><span>Entregas em partes, com código revisado, testes e ambiente para você acompanhar.</span></div></li>
-          <li><span class="n">04</span><div><b>Entregar</b><span>Deploy em container, monitorado e pronto para crescer junto com o uso.</span></div></li>
-        </ul>
+        <p class="lead">Um caminho curto e transparente. Você sempre sabe em que etapa o projeto está e o que vem a seguir.</p>
       </div>
-      <div>
-        <p class="eyebrow">Nossa stack</p>
-        <h2 style="font-size:clamp(24px,3vw,32px)">As ferramentas que usamos<br>em todos os projetos.</h2>
-        <div class="chips">
-          <span class="chip">React</span>
-          <span class="chip">Vite</span>
-          <span class="chip">Node.js</span>
-          <span class="chip">Fastify</span>
-          <span class="chip">Prisma</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">Docker</span>
-          <span class="chip">Expo</span>
-          <span class="chip">PWA offline</span>
-          <span class="chip">TypeScript</span>
+
+      <div class="pipe">
+        <div class="step">
+          <span class="n">etapa 01</span>
+          <h4>Entender</h4>
+          <p>Mapeamos a operação e as regras de negócio antes de escrever qualquer linha de código.</p>
         </div>
+        <div class="step">
+          <span class="n">etapa 02</span>
+          <h4>Desenhar</h4>
+          <p>Arquitetura, interface e contrato da API definidos para não precisar refazer depois.</p>
+        </div>
+        <div class="step">
+          <span class="n">etapa 03</span>
+          <h4>Construir</h4>
+          <p>Entregas em partes, com código revisado, testes e um ambiente para você acompanhar.</p>
+        </div>
+        <div class="step last">
+          <span class="n">etapa 04</span>
+          <h4>Entregar <svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></h4>
+          <p>Deploy em container, monitorado e pronto para crescer junto com o uso.</p>
+        </div>
+      </div>
+
+      <div class="stack">
+        <span class="lbl">stack:</span>
+        <span class="list">React <span>·</span> Vite <span>·</span> TypeScript <span>·</span> Node.js <span>·</span> Fastify <span>·</span> Prisma <span>·</span> PostgreSQL <span>·</span> Docker <span>·</span> Expo <span>·</span> PWA offline</span>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-band" id="contato">
-    <div class="wrap">
-      <div class="cta-card">
-        <div class="glowspot" aria-hidden="true"></div>
-        <p class="eyebrow">Vamos construir</p>
-        <h2>Tem um sistema em mente?<br>A ROGIMA entrega.</h2>
-        <p>Conte o que o seu negócio precisa resolver. A gente desenha a solução e cuida da construção até estar no ar.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="mailto:contato@rogima.tec.br">Falar com a ROGIMA</a>
-          <a class="btn btn-ghost" href="#projetos">Ver os projetos</a>
-        </div>
+  <!-- CTA: compose -->
+  <section id="contato">
+    <div class="wrap compose-grid">
+      <div>
+        <p class="kick"><span class="idx">04</span><span class="bar"></span> Vamos conversar</p>
+        <h2>Tem um sistema em mente?</h2>
+        <p class="lead">Escreva o que o seu negócio precisa resolver. A gente desenha a solução e cuida da construção até estar no ar — entregue.</p>
       </div>
+      <form class="compose" id="compose">
+        <div class="ch"><span class="mark" aria-hidden="true"></span><span>nova mensagem para a ROGIMA</span></div>
+        <textarea id="msg" placeholder="Ex.: preciso de um sistema para controlar as entregas da minha distribuidora, com app para os motoristas…" aria-label="Sua mensagem"></textarea>
+        <div class="send">
+          <span class="hint">abre no seu e-mail · contato@rogima.com.br</span>
+          <button class="btn btn-primary" type="submit">Enviar <svg class="ticks" viewBox="0 0 30 17"><path d="M2 9l4.5 4.5L15 4"/><path d="M12.5 13.5L21 4"/></svg></button>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -467,26 +476,26 @@
         <div class="foot-col">
           <h4>EMPRESA</h4>
           <a href="#fazemos">O que fazemos</a>
-          <a href="#processo">Como trabalhamos</a>
+          <a href="#processo">Como entregamos</a>
           <a href="#contato">Contato</a>
         </div>
         <div class="foot-col">
-          <h4>PROJETOS</h4>
-          <a href="#projetos">Agro Hub</a>
-          <a href="#projetos">Meus Favoritos</a>
-          <a href="#projetos">Cria+</a>
-          <a href="#projetos">Notifica-me</a>
+          <h4>ENTREGAS</h4>
+          <a href="#entregas">Agro Hub</a>
+          <a href="#entregas">Meus Favoritos</a>
+          <a href="#entregas">Cria+</a>
+          <a href="#entregas">Notifica-me</a>
         </div>
         <div class="foot-col">
           <h4>CONTATO</h4>
-          <a href="mailto:contato@rogima.tec.br">contato@rogima.tec.br</a>
+          <a href="mailto:contato@rogima.com.br">contato@rogima.com.br</a>
           <span>Brasil</span>
         </div>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr">2026</span> ROGIMA Tecnologia. Todos os direitos reservados.</span>
-      <span>Feito para entregar.</span>
+      <span>© <span id="yr">2026</span> ROGIMA Tecnologia</span>
+      <span>feito para entregar ✓✓</span>
     </div>
   </div>
 </footer>
@@ -500,14 +509,24 @@
   // year
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // reveal on scroll (single orchestrated reveal per element)
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('section .wrap > *, .proj-row, .cap').forEach((el, i) => {
-    el.classList.add('reveal');
-    el.style.transitionDelay = Math.min(i % 6, 5) * 55 + 'ms';
-    io.observe(el);
+  // single orchestrated moment: the ledger marks each row as delivered on first view
+  const ledger = document.getElementById('ledger');
+  if (ledger){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ ledger.classList.add('live'); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(ledger);
+  }
+
+  // compose -> open the user's email client with the message prefilled
+  const compose = document.getElementById('compose');
+  compose.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const body = document.getElementById('msg').value.trim();
+    const url = 'mailto:contato@rogima.com.br'
+      + '?subject=' + encodeURIComponent('Novo projeto — via site')
+      + '&body=' + encodeURIComponent(body);
+    window.location.href = url;
   });
 </script>
 </body>
